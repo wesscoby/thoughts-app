@@ -1,0 +1,15 @@
+
+language: node_js
+node_js:
+  - "10"
+env:
+  - PORT=3000
+  - BASE_URL='https://thoughtsapp.now.sh'
+  - CALLBACK_URL='https://thoughtsapp.now.sh/callback'
+cache:
+  directories:
+    - $HOME/.cache/yarn
+    - node_modules
+    - .next/cache
+script:
+  - yarn build

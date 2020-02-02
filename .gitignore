@@ -1,5 +1,8 @@
-# Dependency directories
+# Dependency directories and files
 node_modules/
+.env.*
+config.js
+server/config.js
 
 # next.js build output
 .next
