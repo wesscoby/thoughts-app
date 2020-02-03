@@ -1,17 +1,22 @@
-import React from 'react'
-import Link from 'next/link'
+import fetch from 'isomorphic-unfetch';
+import { Container } from 'reactstrap';
 
-export default () => (
-  <ul>
-    <li>
-      <Link href="/a" as="/a">
-        <a>a</a>
-      </Link>
-    </li>
-    <li>
-      <Link href="/b" as="/b">
-        <a>b</a>
-      </Link>
-    </li>
-  </ul>
-)
+import { Thoughts } from '../components';
+
+function Index(props: any) {
+  return (
+    <Container>
+      <Thoughts thoughts={props.thoughts} />
+    </Container>
+  );
+}
+
+Index.getInitialProps = async ({ req }: any) => {
+  const baseURL = req ? `${req.protocol}://${req.get("Host")}` : "";
+  const res = await fetch(`${baseURL}/api/thoughts`);
+  return {
+    thoughts: await res.json()
+  };
+};
+
+export default Index;
