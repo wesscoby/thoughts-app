@@ -1,6 +1,7 @@
 
 
 module.exports = {
+  target: 'server',
   env: {
     PORT: process.env.PORT,
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
