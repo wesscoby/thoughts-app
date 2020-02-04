@@ -25,7 +25,7 @@ router.post("/api/thoughts", ensureAuthenticated, (req, res) => {
   const newThought = {
     _id: new Date().getTime(),
     message,
-    author: req.session!.passport.user.displayName
+    author: req.session!.passport.user.nickname
     // author: req.user.displayName! as any
   };
   thoughts.push(newThought);
