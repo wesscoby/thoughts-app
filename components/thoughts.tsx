@@ -1,21 +1,25 @@
-import { Row, Col } from 'reactstrap';
+import { MDBRow, MDBCol, MDBIcon } from 'mdbreact';
 
 import { Thought } from "./";
 
 
 export default function Thoughts(props: any) {
   return (
-    <Row>
-      <Col xs={12}>
-        <h2>Latest Thoughts</h2>
-      </Col>
+    <MDBRow>
+      <MDBCol className="mb-3">
+        <h2 className="text-light">
+          <MDBIcon icon="retweet" /> Latest Thoughts
+        </h2>
+      </MDBCol>
+      <MDBRow>
       {props.thoughts &&
         props.thoughts.map((thought: any) => (
-          <Col key={thought._id} xs={12} sm={6} md={4} lg={3}>
+          <MDBCol key={thought._id} size="3">
             <Thought thought={thought} />
-          </Col>
+          </MDBCol>
         ))}
-      {!props.thoughts && <Col xs={12}>Loading...</Col>}
-    </Row>
+      {!props.thoughts && <MDBCol>Loading...</MDBCol>}
+      </MDBRow>
+    </MDBRow>
   );
 }

@@ -3,8 +3,10 @@ import App from "next/app";
 import Head from "next/head";
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Jumbotron } from 'reactstrap';
+import { MDBJumbotron, MDBContainer } from 'mdbreact';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 
 import { Navbar } from '../components';
 
@@ -48,11 +50,11 @@ class MyApp extends App {
           />
         </Head>
         <Navbar user={this.state.user} />
-        <Container>
-          <Jumbotron className="bg-secondary">
+        <MDBContainer>
+          <MDBJumbotron className="bg-dark">
             <Component {...props} />
-          </Jumbotron>
-        </Container>
+          </MDBJumbotron>
+        </MDBContainer>
       </>
     );
   }

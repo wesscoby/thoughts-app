@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Router from "next/router";
-import { Container, Form, Button, FormGroup, Label, Input } from 'reactstrap';
+import { MDBContainer, MDBIcon, MDBBtn, MDBInput } from 'mdbreact';
 
 export default function ShareThought() {
   const [message, setMessage] = useState("");
@@ -20,23 +20,20 @@ export default function ShareThought() {
   }
 
   return (
-    <Container>
-      <Form onSubmit={submit}>
-        <FormGroup>
-          <Label for="message" className="text-light">What is on your mind?</Label>
-          <Input
-            type="text"
-            name="message"
-            id="message"
-            placeholder="Say something"
-            onChange={(e: any) => setMessage(e.target.value)}
-            value={message}
-          />
-        </FormGroup>
-        <Button color="dark" type="submit">
-          Share
-        </Button>
-      </Form>
-    </Container>
+    <MDBContainer>
+      <form>
+        <MDBInput 
+          label="What's on your mind?" 
+          icon="comment" group 
+          type="text" 
+          name="message" 
+          onChange={(e: any) => setMessage(e.target.value)}
+          className="text-primary"
+        />
+        <MDBBtn size="sm" color="primary" type="submit" onClick={submit}>
+          <MDBIcon far icon="share-square" /> Share
+        </MDBBtn>
+      </form>
+    </MDBContainer>
   );
 }

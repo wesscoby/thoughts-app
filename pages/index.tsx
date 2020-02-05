@@ -1,13 +1,13 @@
 import fetch from 'isomorphic-unfetch';
-import { Container } from 'reactstrap';
+import { MDBContainer } from 'mdbreact';
 
 import { Thoughts } from '../components';
 
 function Index(props: any) {
   return (
-    <Container>
+    <MDBContainer>
       <Thoughts thoughts={props.thoughts} />
-    </Container>
+    </MDBContainer>
   );
 }
 
