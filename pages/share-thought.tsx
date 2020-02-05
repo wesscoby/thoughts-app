@@ -28,7 +28,7 @@ export default function ShareThought() {
           type="text" 
           name="message" 
           onChange={(e: any) => setMessage(e.target.value)}
-          className="text-primary"
+          className="text-light"
         />
         <MDBBtn size="sm" color="primary" type="submit" onClick={submit}>
           <MDBIcon far icon="share-square" /> Share
