@@ -1,43 +1,76 @@
 import { useState } from 'react';
 import Link from "next/link";
-// import Container from "react-bootstrap/Container";
-// import Navbar from "react-bootstrap/Navbar";
-// import Nav from "react-bootstrap/Nav";
-import { Container, Navbar as RSNavbar, Nav, NavbarBrand, NavbarToggler, Collapse } from 'reactstrap';
+import { MDBIcon, MDBNavbarNav, MDBNavbar, MDBContainer, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu } from 'mdbreact';
 
 export default function AppNavbar({ user }: any) {
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  // const navbarStyle = { marginBottom: "25px" };
   return (
-    <RSNavbar color="dark" dark expand="md" className="mb-5">
-      <Container>
-        <NavbarBrand href="/">Thoughts!</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            {user && (
-              <>
+    <MDBNavbar color="black" dark expand="md" className="mb-4">
+      <MDBContainer>
+        <Link href="/">
+          <a className="navbar-brand">
+          <strong>
+            <MDBIcon icon="brain"/> Thoughts
+          </strong>
+          </a>
+        </Link>
+
+        <MDBNavbarToggler onClick={toggle} />
+
+        <MDBCollapse id="navbarCollapse" isOpen={isOpen} navbar>
+
+          {user && (
+            <>
+              <MDBNavbarNav left>
                 <Link href="/share-thought">
-                  <a className="nav-link">New Thought</a>
+                  <MDBNavItem>
+                    <a className="nav-link">
+                      <MDBIcon icon="plus-circle" /> New Thought
+                    </a>
+                  </MDBNavItem>
                 </Link>
-                <Link href="/profile">
-                  <a className="nav-link">Profile</a>
-                </Link>
-                <Link href="/logout">
-                  <a className="nav-link">Log Out</a>
-                </Link>
-              </>
-            )}
-            {!user && (
+              </MDBNavbarNav>
+
+              <MDBNavbarNav right>
+                <MDBNavItem>
+                  <MDBDropdown>
+                    <MDBDropdownToggle nav caret>
+                      <MDBIcon icon="user-circle" /> {user.nickname}
+                    </MDBDropdownToggle>
+
+                    <MDBDropdownMenu className="dropdown-default">
+                      <Link href="/profile">
+                        <a className="dropdown-item">
+                          <MDBIcon icon="user" /> Profile
+                        </a>
+                      </Link>
+
+                      <Link href="/logout">
+                        <a className="dropdown-item">
+                          <MDBIcon icon="sign-out-alt" /> Logout
+                        </a>
+                      </Link>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                </MDBNavItem>
+              </MDBNavbarNav>
+            </>
+          )}
+          {!user && (
+            <MDBNavbarNav right>
               <Link href="/login">
-                <a className="nav-link">Log In</a>
+                <MDBNavItem>
+                <a className="nav-link">
+                  <MDBIcon icon="sign-in-alt" /> Log In
+                </a>
+                </MDBNavItem>
               </Link>
-            )}
-          </Nav>
-        </Collapse>
-      </Container>
-    </RSNavbar>
+            </MDBNavbarNav>
+          )}
+        </MDBCollapse>
+      </MDBContainer>
+    </MDBNavbar>
   );
 }

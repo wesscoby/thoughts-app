@@ -1,16 +1,18 @@
 import {
-  Card, CardBody, CardTitle, 
-  CardText
-} from 'reactstrap';
+  MDBCard, MDBCardBody, 
+  MDBCardText,
+  MDBCardTitle,
+  MDBIcon,
+} from 'mdbreact';
 
 export default function Thought({ thought }: any) {
 
   return (
-    <Card>
-      <CardBody>
-        <CardTitle>{thought.message}</CardTitle>
-        <CardText>by {thought.author}</CardText>
-      </CardBody>
-    </Card>
+    <MDBCard className="mb-4">
+      <MDBCardBody>
+        <MDBCardTitle>{thought.message}</MDBCardTitle>
+        <MDBCardText><MDBIcon icon="comment" /> {thought.author}</MDBCardText>
+      </MDBCardBody>
+    </MDBCard>
   );
 }

@@ -2,7 +2,7 @@
 
 function Profile({ user }: any) {
   return (
-    <div>
+    <div className="text-light">
       <p>This is what we know about you:</p>
       <ul>
         { Object.keys(user).map(key => (
