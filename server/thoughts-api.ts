@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 
+
 const router = express.Router();
 router.use(express.json());
 
@@ -26,7 +27,6 @@ router.post("/api/thoughts", ensureAuthenticated, (req, res) => {
     _id: new Date().getTime(),
     message,
     author: req.session!.passport.user.nickname
-    // author: req.user.displayName! as any
   };
   thoughts.push(newThought);
   res.send({ message: "Thanks!" });
