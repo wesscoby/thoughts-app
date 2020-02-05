@@ -7,16 +7,15 @@ import next from 'next';
 import passport from 'passport';
 const Auth0Strategy = require('passport-auth0');
 
-import { AUTH0_DOMAIN, AUTH0_CLIENT_ID,
-  AUTH0_CLIENT_SECRET, CALLBACK_URL 
-} from '../config';
+import { NODE_ENV, AUTH0_DOMAIN, AUTH0_CLIENT_ID,
+  AUTH0_CLIENT_SECRET, CALLBACK_URL, PORT
+} from './config';
 import authRoutes from './auth-routes';
 import thoughtsAPI from './thoughts-api';
 
 
-const port = parseInt(process.env.PORT || '3000', 10);
-const dev = process.env.NODE_ENV !== 'production';
-
+const port = parseInt(PORT || '3000', 10);
+const dev = NODE_ENV !== 'production';
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 
@@ -56,9 +55,11 @@ nextApp.prepare().then(() => {
   passport.serializeUser((user, done) => done(null, user));
   passport.deserializeUser((user, done) => done(null, user));
 
-  // Adding Passport and authentication routes
+  // Adding Passport
   app.use(passport.initialize());
   app.use(passport.session());
+
+  // Routes
   app.use(authRoutes);
   app.use(thoughtsAPI);
 
@@ -71,12 +72,10 @@ nextApp.prepare().then(() => {
   app.use("/profile", restrictAccess);
   app.use("/share-thought", restrictAccess);
 
-  // handling everything else with Next.js
+  // handle everything else with Next.js
   app.get("*", (req, res) => handle(req, res, parse(req.url!, true)));
 
   createServer(app).listen(port, () => {
     console.log(`> Server listening on port ${port}`);
   });
 });
-
-
